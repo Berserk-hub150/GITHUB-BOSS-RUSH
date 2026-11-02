@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#080b18" />
+  <meta name="description" content="Turn any public GitHub profile into a playable arcade boss battle. Fight your friends, export your victory card, and share the challenge." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="GITHUB BOSS RUSH — Code. Fight. Repeat." />
+  <meta property="og:description" content="Your GitHub profile is now a boss fight. Play your friends in a free, open-source pixel-art arcade game." />
+  <meta property="og:image" content="https://berserk-hub150.github.io/GITHUB-BOSS-RUSH/assets/banner.svg" />
+  <meta property="og:url" content="https://berserk-hub150.github.io/GITHUB-BOSS-RUSH/" />
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg" />
+  <link rel="stylesheet" href="./styles.css" />
+  <title>GITHUB BOSS RUSH — Code. Fight. Repeat.</title>
+</head>
+<body>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="page-glow" aria-hidden="true"></div>
+  <div class="shell">
+    <nav class="topbar" aria-label="Main navigation">
+      <a class="brand" href="./" aria-label="GitHub Boss Rush home"><span class="brand-icon">◆</span><span>GITHUB<span class="brand-highlight">/</span>BOSS<span class="brand-highlight">/</span>RUSH</span></a>
+      <div class="top-links"><span class="live-pill"><i></i> OPEN SOURCE ARCADE</span><a class="nav-github" href="https://github.com/Berserk-hub150/GITHUB-BOSS-RUSH" target="_blank" rel="noopener noreferrer">★ <span>STAR ON GITHUB</span> <span aria-hidden="true">↗</span></a></div>
+    </nav>
+
+    <header class="hero-intro">
+      <div class="eyebrow"><span class="tiny-cross">✦</span> THE FIRST GITHUB FIGHTING GAME <span class="hero-version">// V1.0</span></div>
+      <h1>YOUR CODE.<br><em>YOUR BOSS FIGHT.</em></h1>
+      <p>Every developer has a story. <strong>Yours has a health bar.</strong> Enter two GitHub usernames, throw some punches, and prove who rules the repo.</p>
+      <div class="hero-stat-row"><span><b>01</b> PICK YOUR RIVAL</span><span class="hero-dash">/</span><span><b>02</b> ENTER THE ARENA</span><span class="hero-dash">/</span><span><b>03</b> SHARE THE CHAOS</span></div>
+    </header>
+
+    <main>
+      <section class="matchmaker" aria-label="Choose fighters">
+        <div class="section-title"><span class="section-no">01 /</span> CONFIGURE THE BATTLE <span class="section-deco">▰▰▰▱▱</span></div>
+        <form id="battle-form" class="fighter-form">
+          <label class="fighter-input"><span class="field-label"><span class="field-dot cyan"></span> PLAYER 01 <small>YOU</small></span><span class="input-row"><span class="at">@</span><input id="hero-input" name="hero" maxlength="39" autocomplete="off" spellcheck="false" autocapitalize="none" value="Berserk-hub150" aria-label="Your GitHub username" required /><span class="input-indicator">▌</span></span></label>
+          <div class="versus" aria-label="versus">VS<span>⚡</span></div>
+          <label class="fighter-input rival"><span class="field-label"><span class="field-dot pink"></span> PLAYER 02 <small>THE BOSS</small></span><span class="input-row"><span class="at">@</span><input id="boss-input" name="boss" maxlength="39" autocomplete="off" spellcheck="false" autocapitalize="none" value="torvalds" aria-label="Opponent GitHub username" required /><span class="input-indicator">▌</span></span></label>
+          <button class="start-btn" type="submit" id="start-btn"><span>⚔</span> <span id="start-label">START BATTLE</span> <span>↗</span></button>
+        </form>
+        <div class="quick-picks"><span class="quick-label">QUICK CHALLENGES:</span><button class="preset" data-boss="torvalds" type="button">@torvalds</button><button class="preset" data-boss="sindresorhus" type="button">@sindresorhus</button><button class="preset" data-boss="gaearon" type="button">@gaearon</button><button class="preset" data-boss="t3dotgg" type="button">@t3dotgg</button><span class="api-tag">● PUBLIC GITHUB API</span></div>
+      </section>
+
+      <section class="arena-section" aria-label="The arcade">
+        <div class="arena-top"><div class="section-title"><span class="section-no">02 /</span> THE ARENA <span class="arena-label">// NEON TERMINAL</span></div><div class="arena-badges"><span id="data-mode" class="data-badge">DEMO DATA</span><span class="fps-badge">60 FPS TARGET</span></div></div>
+        <div class="arcade-cabinet">
+          <div class="cabinet-frame">
+            <canvas id="arena" width="960" height="540" aria-label="Pixel-art fighting game. Use A and D to move, J to punch, K for a heavy attack, L for special and Space to block." role="img"></canvas>
+            <div id="loading-overlay" class="screen-overlay" hidden><div class="overlay-card"><div class="loader-pixels">▰ ▰ ▰</div><h2>SUMMONING FIGHTERS</h2><p>Fetching public GitHub profiles...</p></div></div>
+            <div id="end-overlay" class="screen-overlay" hidden><div class="overlay-card result-card"><span id="result-kicker">MATCH COMPLETE</span><h2 id="result-title">VICTORY!</h2><p id="result-subtitle">You defeated the boss.</p><div class="result-buttons"><button type="button" class="primary-small" id="rematch-btn">↻ REMATCH</button><button type="button" class="secondary-small" id="result-download">↓ VICTORY CARD</button></div></div></div>
+            <div id="idle-overlay" class="screen-overlay idle-overlay"><div class="overlay-card intro-card"><span class="intro-chip">INSERT COIN // FREE PLAY</span><h2>READY, PLAYER ONE?</h2><p>Choose your rival. No wallet. No login. Just pixels and public GitHub stats.</p><button type="button" class="primary-small" id="intro-play">⚔ ENTER THE ARENA</button><span class="mini-line">J PUNCH · K HEAVY · L SPECIAL</span></div></div>
+          </div>
+          <div class="cabinet-footer"><span><span class="green-dot">●</span> ARCADE SYSTEM ONLINE</span><span>BUILT WITH <span class="accent">♥</span> &amp; JAVASCRIPT</span><button type="button" id="sound-toggle" class="sound-control" aria-pressed="false">♪ SOUND OFF</button></div>
+        </div>
+        <p id="status" class="status" role="status" aria-live="polite">Ready for battle. Try a name above and press START BATTLE.</p>
+      </section>
+
+      <section class="control-section" aria-label="Controls">
+        <div class="section-title"><span class="section-no">03 /</span> KNOW YOUR MOVES</div>
+        <div class="control-grid"><div class="control"><span class="key-group"><kbd>A</kbd><kbd>D</kbd></span><span>MOVE</span></div><div class="control"><kbd>J</kbd><span>PUNCH</span></div><div class="control"><kbd>K</kbd><span>HEAVY</span></div><div class="control"><kbd>L</kbd><span>SPECIAL</span></div><div class="control"><kbd class="key-wide">SPACE</kbd><span>BLOCK</span></div></div>
+        <div class="mobile-controls" id="mobile-controls" aria-label="On-screen game controls"><div class="move-controls"><button type="button" data-control="left" aria-label="Move left">◀</button><button type="button" data-control="right" aria-label="Move right">▶</button></div><div class="action-controls"><button type="button" data-control="block" class="mobile-block" aria-label="Block">SHIELD</button><button type="button" data-control="punch" aria-label="Punch">J</button><button type="button" data-control="heavy" aria-label="Heavy attack">K</button><button type="button" data-control="special" class="mobile-special" aria-label="Special attack">L</button></div></div>
+      </section>
+
+      <section class="share-section"><div class="share-copy"><div class="section-title"><span class="section-no">04 /</span> SPREAD THE MAYHEM</div><h2>YOUR RIVAL IS<br><em>ONE LINK AWAY.</em></h2><p>Challenge a friend with a personal match link. Or export a victory card and start some friendly developer drama.</p><div class="share-actions"><button type="button" id="copy-link" class="share-btn purple">⤴ COPY CHALLENGE LINK</button><button type="button" id="download-card" class="share-btn dark">↓ DOWNLOAD CARD</button></div></div><div class="ticket-preview" aria-hidden="true"><div class="ticket-top">★ ★ ★ ★ ★ <span>GITHUB BOSS RUSH</span></div><div class="ticket-body"><span>CHALLENGE ACCEPTED</span><strong>YOU<br>VS.<br><em>THE INTERNET</em></strong><div class="ticket-bar"><i></i></div></div><div class="ticket-bottom">INSERT CODE TO CONTINUE <span>001001</span></div></div></section>
+      <aside class="note"><span>ⓘ</span> Stats are playful attributes derived from public GitHub numbers, not measures of coding skill. GitHub is a trademark of GitHub, Inc. This independent project is not affiliated with GitHub. Demo profiles use fictionalized sample values and are labeled.</aside>
+    </main>
+    <footer><a class="footer-logo" href="./">◆ GITHUB BOSS RUSH</a><span>THE OPEN-SOURCE ARCADE EXPERIMENT · MIT LICENSE</span><a href="https://github.com/Berserk-hub150/GITHUB-BOSS-RUSH" target="_blank" rel="noopener noreferrer">VIEW SOURCE ↗</a></footer>
+  </div>
+  <script type="module" src="./src/app.mjs"></script>
+</body>
+</html>
